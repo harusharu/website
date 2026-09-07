@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import BackLink from "@/components/ui/BackLink";
 import { defaultOgImage, profile, siteUrl } from "@/content";
 import { getPostBySlug, getPosts, renderMarkdown } from "@/lib/posts";
-import { formatLongDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 type PostPageProps = {
 	params: Promise<{
@@ -128,7 +128,7 @@ const PostPage = async ({ params }: PostPageProps) => {
 			<div className="flex flex-wrap items-center justify-between gap-2">
 				<p className="mono-label tnum">
 					By {profile.name} ·{" "}
-					<time dateTime={post.date}>{formatLongDate(post.date)}</time>
+					<time dateTime={post.date}>{formatDate(post.date, "long")}</time>
 				</p>
 				<BackLink href="/posts" label="All posts" />
 			</div>
