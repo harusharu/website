@@ -35,7 +35,7 @@ const About = () => {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						aria-hidden
-						className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-(--background) to-transparent"
+						className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-(--gb-surface) to-transparent"
 					/>
 				)}
 			</motion.div>
@@ -45,7 +45,7 @@ const About = () => {
 				type="button"
 				onClick={() => setExpanded((v) => !v)}
 				aria-expanded={expanded}
-				className="text-muted-foreground hover:text-foreground self-start text-sm font-medium underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--gb-fg0)"
+				className="text-(--gb-fg2) hover:text-(--accent) self-start text-sm font-medium underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
 			>
 				{expanded ? "See less" : "See more"}
 			</motion.button>

@@ -19,21 +19,23 @@ interface ProjectCardProps {
 	previewVideo: string;
 }
 
-const statusMeta: Record<ProjectStatus, { label: string; className: string }> =
-	{
-		active: {
-			label: "Active",
-			className: "bg-emerald-100 text-emerald-700",
-		},
-		building: {
-			label: "Building",
-			className: "bg-amber-100 text-amber-700",
-		},
-		archived: {
-			label: "Archived",
-			className: "border border-amber-500 bg-amber-50 text-amber-700",
-		},
-	};
+const statusMeta: Record<
+	ProjectStatus,
+	{ label: string; dotClassName: string }
+> = {
+	active: {
+		label: "Active",
+		dotClassName: "bg-emerald-500",
+	},
+	building: {
+		label: "Building",
+		dotClassName: "bg-(--accent)",
+	},
+	archived: {
+		label: "Archived",
+		dotClassName: "bg-(--gb-fg2)",
+	},
+};
 
 const ProjectCard = ({
 	slug,
@@ -55,14 +57,14 @@ const ProjectCard = ({
 
 	return (
 		<motion.article
-			className="project-card relative rounded-md"
-			whileHover={{ y: -2, boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}
+			className="project-card relative rounded-xl"
+			whileHover={{ y: -2 }}
 			transition={{ type: "spring", stiffness: 400, damping: 30 }}
 		>
 			<Link
 				href={projectPagePath}
 				aria-label={`Open project details for ${title}`}
-				className="absolute inset-0 z-20 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--gb-fg0)"
+				className="absolute inset-0 z-20 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent)"
 			/>
 
 			{hasPreview && (
@@ -73,7 +75,7 @@ const ProjectCard = ({
 				>
 					<div className="p-2.5">
 						<video
-							className="w-full rounded-md"
+							className="w-full rounded-lg"
 							loop
 							autoPlay
 							muted
@@ -88,16 +90,18 @@ const ProjectCard = ({
 				</div>
 			)}
 
-			<div className="p-2.5">
-				<div className="flex flex-col gap-1">
+			<div className="p-3.5">
+				<div className="flex flex-col gap-1.5">
 					<div className="flex items-center justify-between">
-						<div className="flex min-w-0 items-center gap-2">
-							<h2 className="truncate text-lg sm:text-xl md:text-2xl font-semibold">
+						<div className="flex min-w-0 items-center gap-2.5">
+							<h2 className="truncate text-lg sm:text-xl md:text-2xl font-semibold text-(--gb-fg0)">
 								{title}
 							</h2>
-							<span
-								className={`pointer-events-none shrink-0 rounded px-2 py-0.5 text-sm font-semibold leading-none tracking-wide ${statusInfo.className}`}
-							>
+							<span className="status-tag">
+								<span
+									aria-hidden="true"
+									className={`status-tag-dot ${statusInfo.dotClassName}`}
+								/>
 								{statusInfo.label}
 							</span>
 						</div>
@@ -142,18 +146,18 @@ const ProjectCard = ({
 						</div>
 					</div>
 
-					<p className="opacity-80">{description}</p>
+					<p className="text-(--gb-fg1)">{description}</p>
 				</div>
 			</div>
 
 			<div className="overflow-hidden">
-				<div className="mt-3 flex border-t border-(--gb-border) md:mt-0" />
-				<div className="flex items-center px-2 py-2 md:py-1.5">
+				<div className="mt-1 flex border-t border-(--gb-border)" />
+				<div className="flex items-center px-3.5 py-2.5">
 					<ul className="flex flex-wrap gap-1.5 select-none">
 						{skills.map((skill) => (
 							<li
 								key={`${title}-${skill}`}
-								className="list-none rounded-md border border-(--gb-border) px-2 py-0.5 text-sm"
+								className="mono-label list-none rounded-md border border-(--gb-border) px-2 py-1"
 							>
 								{skill}
 							</li>

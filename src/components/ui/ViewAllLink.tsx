@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { hoverScale, springTransition, tapScale } from "@/lib/utils";
@@ -11,7 +11,7 @@ interface ViewAllLinkProps {
 }
 
 // Reused by home sections to keep CTA behavior and styling consistent.
-const ViewAllLink = ({ href, label = "View All" }: ViewAllLinkProps) => {
+const ViewAllLink = ({ href, label = "View all" }: ViewAllLinkProps) => {
 	return (
 		<motion.div
 			whileHover={hoverScale}
@@ -20,11 +20,11 @@ const ViewAllLink = ({ href, label = "View All" }: ViewAllLinkProps) => {
 		>
 			<Link
 				href={href}
-				className="showMore-btn select-none w-full px-2 py-1 rounded-md block"
+				className="showMore-btn group select-none w-full px-2 py-1.5 rounded-lg block"
 			>
-				<span className="flex items-center justify-center gap-0.5">
-					<ChevronsDown />
+				<span className="flex items-center justify-center gap-1.5 text-sm font-medium">
 					{label}
+					<ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
 				</span>
 			</Link>
 		</motion.div>
