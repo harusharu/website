@@ -23,11 +23,7 @@ const toAbsoluteUrl = (value: string) => {
 		return "";
 	}
 
-	if (/^https?:\/\//.test(value)) {
-		return value;
-	}
-
-	return `${siteUrl}${value.startsWith("/") ? "" : "/"}${value}`;
+	return new URL(value, siteUrl).href;
 };
 
 const buildLlmsText = () => {
