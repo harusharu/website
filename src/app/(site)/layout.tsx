@@ -1,14 +1,10 @@
 import type { ReactNode } from "react";
 import ScrollRestorer from "@/components/ScrollRestorer";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const SiteLayout = ({ children }: { children: ReactNode }) => (
-	<div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 md:py-14">
-		<header className="flex justify-end pb-4 sm:pb-6">
-			<ThemeToggle />
-		</header>
+	<div className="mx-auto max-w-3xl px-4 pt-10 pb-28 sm:px-6 sm:pt-14 sm:pb-32 md:pt-20 md:pb-36">
 		<ScrollRestorer />
-		<main className="py-3">{children}</main>
+		<main>{children}</main>
 	</div>
 );
 

@@ -1,14 +1,18 @@
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { siteFontVariables } from "@/app/fonts";
+import FloatingDock from "@/components/navigation/FloatingDock";
 import { ThemeProvider } from "@/components/theme-provider";
 import { profile, profileAvatarUrl, seoMetadata, siteUrl } from "@/content";
 import "./globals.css";
 
-export const metadata = seoMetadata;
+export const metadata: Metadata = seoMetadata;
 export const viewport: Viewport = {
-	colorScheme: "light",
-	themeColor: "#ffffff",
+	colorScheme: "light dark",
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#fdfbf8" },
+		{ media: "(prefers-color-scheme: dark)", color: "#14110f" },
+	],
 };
 
 const personJsonLd = {
@@ -19,6 +23,7 @@ const personJsonLd = {
 	image: profileAvatarUrl,
 	jobTitle: profile.bio,
 	email: `mailto:${profile.email}`,
+	address: profile.location,
 	sameAs: [
 		`https://github.com/${profile.githubUsername}`,
 		`https://x.com/${profile.twitterHandle}`,
@@ -60,6 +65,8 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
+					<div aria-hidden="true" className="grain-overlay" />
+					<FloatingDock />
 					{children}
 				</ThemeProvider>
 			</body>
