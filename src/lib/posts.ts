@@ -7,22 +7,22 @@ import { cache } from "react";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
-import type { BlogPostMeta } from "@/content";
+import type { PostMeta } from "@/content";
 
-// Markdown source files for blog content.
-const postsDirectory = path.join(process.cwd(), "src/content/blog");
+// Markdown source files for post content.
+const postsDirectory = path.join(process.cwd(), "src/content/posts");
 const markdownProcessor = remark().use(remarkGfm).use(remarkHtml, {
 	sanitize: false,
 });
 
-interface BlogPost extends BlogPostMeta {
+interface Post extends PostMeta {
 	content: string;
 }
 
-const byDateDesc = (a: BlogPostMeta, b: BlogPostMeta) =>
+const byDateDesc = (a: PostMeta, b: PostMeta) =>
 	new Date(b.date).getTime() - new Date(a.date).getTime();
 
-const parsePost = (fileName: string): BlogPost | null => {
+const parsePost = (fileName: string): Post | null => {
 	const slug = fileName.replace(/\.md$/, "");
 
 	try {
@@ -38,12 +38,12 @@ const parsePost = (fileName: string): BlogPost | null => {
 			content,
 		};
 	} catch (error) {
-		console.error(`[blog] Failed to parse "${fileName}":`, error);
+		console.error(`[posts] Failed to parse "${fileName}":`, error);
 		return null;
 	}
 };
 
-const loadPosts = cache((): BlogPost[] => {
+const loadPosts = cache((): Post[] => {
 	if (!fs.existsSync(postsDirectory)) {
 		return [];
 	}
@@ -52,10 +52,10 @@ const loadPosts = cache((): BlogPost[] => {
 		.readdirSync(postsDirectory)
 		.filter((fileName) => fileName.endsWith(".md"));
 
-	return files.map(parsePost).filter((post): post is BlogPost => post !== null);
+	return files.map(parsePost).filter((post): post is Post => post !== null);
 });
 
-export const getBlogPosts = (): BlogPostMeta[] =>
+export const getPosts = (): PostMeta[] =>
 	loadPosts()
 		.map((post) => ({
 			slug: post.slug,
@@ -65,7 +65,7 @@ export const getBlogPosts = (): BlogPostMeta[] =>
 		}))
 		.sort(byDateDesc);
 
-export const getBlogPostBySlug = (slug: string): BlogPost | null => {
+export const getPostBySlug = (slug: string): Post | null => {
 	const post = loadPosts().find((entry) => entry.slug === slug);
 	return post ?? null;
 };
@@ -79,7 +79,7 @@ export const renderMarkdown = async (markdown: string): Promise<string> => {
 		const processed = await markdownProcessor.process(markdown);
 		return processed.toString();
 	} catch (error) {
-		console.error("[blog] Failed to render markdown:", error);
+		console.error("[posts] Failed to render markdown:", error);
 		return `<p><em>Failed to render post content.</em></p>`;
 	}
 };

@@ -1,28 +1,7 @@
-import { Bitcoin, Heart, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import type { Metadata } from "next";
 import type { ComponentType } from "react";
-import { BiLogoPostgresql } from "react-icons/bi";
-import { BsFiletypeSql } from "react-icons/bs";
-import { DiJavascript } from "react-icons/di";
-import { FaDocker, FaRust } from "react-icons/fa";
-import {
-	FaGithub,
-	FaGolang,
-	FaLinkedinIn,
-	FaPython,
-	FaXTwitter,
-} from "react-icons/fa6";
-import { IoLogoNodejs } from "react-icons/io5";
-import { RiNextjsLine, RiReactjsLine } from "react-icons/ri";
-import {
-	SiDjango,
-	SiEthereum,
-	SiNixos,
-	SiPostman,
-	SiSolana,
-} from "react-icons/si";
-import { TbBrandTypescript } from "react-icons/tb";
-import { VscTerminalLinux } from "react-icons/vsc";
+import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 export type IconComponent = ComponentType<{ className?: string }>;
 
@@ -34,6 +13,9 @@ interface Profile {
 	name: string;
 	shortName: string;
 	bio: string;
+	tagline: string;
+	introLine: string;
+	location: string;
 	githubUsername: string;
 	twitterHandle: string;
 	linkedinSlug: string;
@@ -41,12 +23,6 @@ interface Profile {
 	calComUsername: string;
 	email: string;
 	website: string;
-	support: {
-		githubSponsorsUsername: string;
-		bitcoinAddress: string;
-		ethereumAddress: string;
-		solanaAddress: string;
-	};
 	aboutHtml: string;
 }
 
@@ -54,6 +30,10 @@ export const profile: Profile = {
 	name: "Harshal Sawant",
 	shortName: "Harshal",
 	bio: "Software Engineer",
+	tagline: "Software Engineer — Systems & Backend",
+	introLine:
+		"I build low-latency backend services and developer tooling in Rust and Go, with a bias for understanding what actually happens under the hood.",
+	location: "Mumbai, India",
 	githubUsername: "c0d3h01",
 	twitterHandle: "haarshalsawant",
 	linkedinSlug: "haarshalsawant",
@@ -61,12 +41,6 @@ export const profile: Profile = {
 	calComUsername: "c0d3h01",
 	email: "harshalsawant.dev@gmail.com",
 	website: "https://harshalsawant.vercel.app",
-	support: {
-		githubSponsorsUsername: "c0d3h01",
-		bitcoinAddress: "bc1qdy2acxf0jk4j94stnmccnkyk5avfhqqc09xjvl",
-		ethereumAddress: "0x87EdD72c510ecc537B167FF21ef726B62f7f600B",
-		solanaAddress: "4RdWWahnTrrtFfFCWy2wgznYGcJseCotphaPbcpSnR8H",
-	},
 	aboutHtml: `
 		<p>I'm Harshal Sawant, a backend and systems engineer based in Mumbai, India. I got into programming the hard way - through Android rooting, kernel modules, and digging into Linux internals - and never really stopped going deeper.</p>
 		<p>Today I build low-latency backend services, distributed systems, and developer tooling, mostly in Rust and Go. I care about things that most people abstract away: scheduler behavior, memory pressure, syscall overhead, and what actually happens under the hood when your system is under load.</p>
@@ -79,33 +53,7 @@ export const profile: Profile = {
  */
 export const profileAvatarUrl = `https://github.com/${profile.githubUsername}.png`;
 
-// ---------------------------------------------------------------------------
-// Skills
-// ---------------------------------------------------------------------------
-
-interface Skill {
-	icon: IconComponent;
-	name: string;
-}
-
-export const skills: Skill[] = [
-	{ icon: FaGolang, name: "Go" },
-	{ icon: FaRust, name: "Rust" },
-	{ icon: FaPython, name: "Python" },
-	{ icon: BsFiletypeSql, name: "SQL" },
-	{ icon: IoLogoNodejs, name: "Node.js" },
-	{ icon: SiDjango, name: "Django" },
-	{ icon: BiLogoPostgresql, name: "PostgreSQL" },
-	{ icon: FaDocker, name: "Docker" },
-	{ icon: VscTerminalLinux, name: "Linux" },
-	{ icon: SiNixos, name: "Nix, NixOS" },
-	{ icon: FaGithub, name: "GitHub Actions" },
-	{ icon: SiPostman, name: "API Testing" },
-	{ icon: TbBrandTypescript, name: "TypeScript" },
-	{ icon: DiJavascript, name: "JavaScript" },
-	{ icon: RiReactjsLine, name: "React" },
-	{ icon: RiNextjsLine, name: "Next.js" },
-];
+export const resumeFilePath = "/docs/Harshal_Sawant_Resume.pdf";
 
 // ---------------------------------------------------------------------------
 // SEO / site metadata
@@ -197,10 +145,10 @@ export const seoMetadata: Metadata = {
 };
 
 // ---------------------------------------------------------------------------
-// Blog metadata shape
+// Post metadata shape
 // ---------------------------------------------------------------------------
 
-export interface BlogPostMeta {
+export interface PostMeta {
 	slug: string;
 	title: string;
 	description: string;
@@ -358,11 +306,8 @@ export const experiences: Experience[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Social, hire + support
+// Social
 // ---------------------------------------------------------------------------
-
-export const emailLink = `mailto:${profile.email}?subject=Interested%20in%20Hiring%20You`;
-export const resumeFilePath = "/public/docs/harshal_sawant-resume.pdf";
 
 interface SocialLink {
 	name: string;
@@ -390,53 +335,5 @@ export const SocialLinks: SocialLink[] = [
 		name: "LinkedIn",
 		href: `https://www.linkedin.com/in/${profile.linkedinSlug}`,
 		icon: FaLinkedinIn,
-	},
-];
-
-export const hireText =
-	"I'm open to software engineering roles and freelance work where I can build reliable backend systems, developer tools, and performance-critical products.";
-
-interface SupportLink {
-	label: string;
-	href: string;
-	icon: IconComponent;
-}
-
-export interface CryptoDonationOption {
-	name: string;
-	shortName: string;
-	address: string;
-	icon: IconComponent;
-}
-
-export const supportText =
-	"If my open-source work, tools, or technical writing helps you, consider supporting me. It helps me keep building and sharing useful developer tools.";
-
-export const supportMethods: SupportLink[] = [
-	{
-		label: "GitHub Sponsors",
-		href: `https://github.com/sponsors/${profile.support.githubSponsorsUsername}`,
-		icon: Heart,
-	},
-];
-
-export const cryptoDonationOptions: CryptoDonationOption[] = [
-	{
-		name: "Bitcoin",
-		shortName: "BTC",
-		address: profile.support.bitcoinAddress,
-		icon: Bitcoin,
-	},
-	{
-		name: "Ethereum",
-		shortName: "ETH",
-		address: profile.support.ethereumAddress,
-		icon: SiEthereum,
-	},
-	{
-		name: "Solana",
-		shortName: "SOL",
-		address: profile.support.solanaAddress,
-		icon: SiSolana,
 	},
 ];

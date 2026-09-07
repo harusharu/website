@@ -1,12 +1,11 @@
 import {
 	experiences,
-	hireText,
 	profile,
 	projects,
+	resumeFilePath,
 	siteUrl,
-	skills,
 } from "@/content";
-import { getBlogPosts } from "@/lib/blog";
+import { getPosts } from "@/lib/posts";
 
 export const dynamic = "force-static";
 
@@ -33,9 +32,6 @@ const toAbsoluteUrl = (value: string) => {
 
 const buildLlmsText = () => {
 	const aboutText = stripHtml(profile.aboutHtml);
-	const primarySkills = Array.from(
-		new Set(skills.map((skill) => skill.name)),
-	).join(", ");
 
 	const experienceLines = experiences
 		.map((entry) => {
@@ -51,10 +47,10 @@ const buildLlmsText = () => {
 		})
 		.join("\n");
 
-	const postLines = getBlogPosts()
+	const postLines = getPosts()
 		.map(
 			(post) =>
-				`- ${post.title} (${post.date}): ${post.description} URL: ${siteUrl}/blog/${post.slug}.`,
+				`- ${post.title} (${post.date}): ${post.description} URL: ${siteUrl}/posts/${post.slug}.`,
 		)
 		.join("\n");
 
@@ -67,7 +63,7 @@ const buildLlmsText = () => {
 		headline: profile.bio,
 		website: siteUrl,
 		email: profile.email,
-		location: "Mumbai, India",
+		location: profile.location,
 		aliases: [profile.name, profile.shortName, profile.githubUsername],
 		usernames: {
 			github: profile.githubUsername,
@@ -83,8 +79,7 @@ const buildLlmsText = () => {
 			codeforces: `https://codeforces.com/profile/${profile.codeforcesUsername}`,
 			cal: `https://cal.com/${profile.calComUsername}`,
 		},
-		resume: toAbsoluteUrl("/assets/docs/resume.pdf"),
-		primarySkills: skills.map((skill) => skill.name),
+		resume: toAbsoluteUrl(resumeFilePath),
 		lastUpdated: today,
 	};
 
@@ -97,11 +92,11 @@ const buildLlmsText = () => {
 		`- Name: ${profile.name}`,
 		`- Preferred name: ${profile.shortName}`,
 		`- Role: ${profile.bio}`,
-		"- Location: Mumbai, India",
+		`- Location: ${profile.location}`,
 		`- Canonical website: ${siteUrl}`,
 		`- Canonical profile URL: ${siteUrl}/`,
 		`- Email: mailto:${profile.email}`,
-		`- Resume: ${toAbsoluteUrl("/assets/docs/resume.pdf")}`,
+		`- Resume: ${toAbsoluteUrl(resumeFilePath)}`,
 		"",
 		"## SEO Keywords",
 		"- Harshal Sawant",
@@ -116,29 +111,26 @@ const buildLlmsText = () => {
 		"",
 		"## Professional Summary",
 		`- ${aboutText}`,
-		`- ${hireText}`,
 		"",
 		"## Canonical Site",
 		`- ${siteUrl}`,
-		"",
-		"## Core Skills",
-		`- ${primarySkills}`,
 		"",
 		"## Experience",
 		experienceLines || "- No public experience entries listed.",
 		"",
 		"## Primary Pages",
-		`- Home: ${siteUrl}/`,
+		`- Intro: ${siteUrl}/`,
+		`- Home: ${siteUrl}/home`,
 		`- Projects: ${siteUrl}/projects`,
 		`- Experience: ${siteUrl}/experience`,
-		`- Blog: ${siteUrl}/blog`,
-		`- Resume: ${toAbsoluteUrl("/assets/docs/resume.pdf")}`,
+		`- Posts: ${siteUrl}/posts`,
+		`- Resume: ${toAbsoluteUrl(resumeFilePath)}`,
 		"",
 		"## Projects",
 		projectLines || "- No public projects listed.",
 		"",
-		"## Blog Posts",
-		postLines || "- No public blog posts listed.",
+		"## Posts",
+		postLines || "- No public posts listed.",
 		"",
 		"## Verified Social Profiles",
 		`- Email: mailto:${profile.email}`,

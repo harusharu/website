@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { projects, siteUrl } from "@/content";
-import { getBlogPosts } from "@/lib/blog";
+import { getPosts } from "@/lib/posts";
 
 const parseLastModified = (dateString: string) => {
 	const parsedDate = new Date(dateString);
@@ -17,11 +17,17 @@ const sitemap = (): MetadataRoute.Sitemap => {
 		{
 			url: `${siteUrl}/`,
 			lastModified: now,
-			changeFrequency: "weekly",
+			changeFrequency: "monthly",
 			priority: 1,
 		},
 		{
-			url: `${siteUrl}/blog`,
+			url: `${siteUrl}/home`,
+			lastModified: now,
+			changeFrequency: "weekly",
+			priority: 0.95,
+		},
+		{
+			url: `${siteUrl}/posts`,
 			lastModified: now,
 			changeFrequency: "weekly",
 			priority: 0.9,
@@ -46,8 +52,8 @@ const sitemap = (): MetadataRoute.Sitemap => {
 		},
 	];
 
-	const blogRoutes: MetadataRoute.Sitemap = getBlogPosts().map((post) => ({
-		url: `${siteUrl}/blog/${post.slug}`,
+	const postRoutes: MetadataRoute.Sitemap = getPosts().map((post) => ({
+		url: `${siteUrl}/posts/${post.slug}`,
 		lastModified: parseLastModified(post.date),
 		changeFrequency: "monthly",
 		priority: 0.7,
@@ -60,7 +66,7 @@ const sitemap = (): MetadataRoute.Sitemap => {
 		priority: 0.7,
 	}));
 
-	return [...staticRoutes, ...blogRoutes, ...projectRoutes];
+	return [...staticRoutes, ...postRoutes, ...projectRoutes];
 };
 
 export default sitemap;

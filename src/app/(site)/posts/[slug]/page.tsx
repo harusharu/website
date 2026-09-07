@@ -1,19 +1,19 @@
-// biome-ignore-all lint/security/noDangerouslySetInnerHtml: rendered markdown comes from local blog files.
+// biome-ignore-all lint/security/noDangerouslySetInnerHtml: rendered markdown comes from local post files.
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import ButtonLink from "@/components/ui/ButtonLink";
+import BackLink from "@/components/ui/BackLink";
 import { defaultOgImage, profile } from "@/content";
-import { getBlogPostBySlug, getBlogPosts, renderMarkdown } from "@/lib/blog";
+import { getPostBySlug, getPosts, renderMarkdown } from "@/lib/posts";
 import { formatLongDate } from "@/lib/utils";
 
-type BlogPostPageProps = {
+type PostPageProps = {
 	params: Promise<{
 		slug: string;
 	}>;
 };
 
 export const generateStaticParams = () => {
-	return getBlogPosts().map((post) => ({
+	return getPosts().map((post) => ({
 		slug: post.slug,
 	}));
 };
@@ -22,9 +22,9 @@ export const dynamicParams = false;
 
 export const generateMetadata = async ({
 	params,
-}: BlogPostPageProps): Promise<Metadata> => {
+}: PostPageProps): Promise<Metadata> => {
 	const { slug } = await params;
-	const post = getBlogPostBySlug(slug);
+	const post = getPostBySlug(slug);
 
 	if (!post) {
 		return {
@@ -36,13 +36,13 @@ export const generateMetadata = async ({
 		title: post.title,
 		description: post.description,
 		alternates: {
-			canonical: `/blog/${post.slug}`,
+			canonical: `/posts/${post.slug}`,
 		},
 		openGraph: {
 			title: post.title,
 			description: post.description,
 			type: "article",
-			url: `/blog/${post.slug}`,
+			url: `/posts/${post.slug}`,
 			publishedTime: post.date,
 			authors: [profile.name],
 			images: [
@@ -64,9 +64,9 @@ export const generateMetadata = async ({
 	};
 };
 
-const BlogPostPage = async ({ params }: BlogPostPageProps) => {
+const PostPage = async ({ params }: PostPageProps) => {
 	const { slug } = await params;
-	const post = getBlogPostBySlug(slug);
+	const post = getPostBySlug(slug);
 
 	if (!post) {
 		notFound();
@@ -77,21 +77,23 @@ const BlogPostPage = async ({ params }: BlogPostPageProps) => {
 	return (
 		<article className="content-rail flex flex-col gap-4">
 			<div className="flex flex-wrap items-center justify-between gap-2">
-				<p className="text-sm opacity-70">{formatLongDate(post.date)}</p>
-				<ButtonLink href="/blog" target="_self" rel="" className="text-sm">
-					{"<- Back to Blog"}
-				</ButtonLink>
+				<time dateTime={post.date} className="mono-label tnum">
+					{formatLongDate(post.date)}
+				</time>
+				<BackLink href="/posts" label="All posts" />
 			</div>
 
-			<h1 className="wrap-break-word text-2xl font-bold">{post.title}</h1>
-			<p className="wrap-break-word opacity-80">{post.description}</p>
+			<h1 className="wrap-break-word text-2xl font-bold text-(--gb-fg0)">
+				{post.title}
+			</h1>
+			<p className="wrap-break-word text-(--gb-fg2)">{post.description}</p>
 
 			<div
-				className="blog-prose flex flex-col gap-4"
+				className="post-prose flex flex-col gap-4"
 				dangerouslySetInnerHTML={{ __html: htmlContent }}
 			/>
 		</article>
 	);
 };
 
-export default BlogPostPage;
+export default PostPage;

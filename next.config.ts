@@ -16,8 +16,18 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: "/resume",
-				destination: "/assets/docs/resume.pdf",
+				destination: "/docs/Harshal_Sawant_Resume.pdf",
 				permanent: false,
+			},
+			{
+				source: "/blog",
+				destination: "/posts",
+				permanent: true,
+			},
+			{
+				source: "/blog/:slug",
+				destination: "/posts/:slug",
+				permanent: true,
 			},
 		];
 	},
