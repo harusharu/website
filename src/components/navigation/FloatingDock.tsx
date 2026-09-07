@@ -20,40 +20,15 @@ interface DockRoute {
 	href: string;
 	label: string;
 	icon: IconComponent;
-	isActive: (pathname: string) => boolean;
+	exact?: boolean;
 }
 
 const dockRoutes: DockRoute[] = [
-	{
-		href: "/",
-		label: "Intro",
-		icon: Fingerprint,
-		isActive: (pathname) => pathname === "/",
-	},
-	{
-		href: "/home",
-		label: "Home",
-		icon: LayoutDashboard,
-		isActive: (pathname) => pathname === "/home",
-	},
-	{
-		href: "/experience",
-		label: "Experience",
-		icon: History,
-		isActive: (pathname) => pathname.startsWith("/experience"),
-	},
-	{
-		href: "/projects",
-		label: "Projects",
-		icon: FolderGit2,
-		isActive: (pathname) => pathname.startsWith("/projects"),
-	},
-	{
-		href: "/posts",
-		label: "Posts",
-		icon: NotebookPen,
-		isActive: (pathname) => pathname.startsWith("/posts"),
-	},
+	{ href: "/", label: "Intro", icon: Fingerprint, exact: true },
+	{ href: "/home", label: "Home", icon: LayoutDashboard, exact: true },
+	{ href: "/experience", label: "Experience", icon: History },
+	{ href: "/projects", label: "Projects", icon: FolderGit2 },
+	{ href: "/posts", label: "Posts", icon: NotebookPen },
 ];
 
 const FloatingDock = () => {
@@ -79,8 +54,8 @@ const FloatingDock = () => {
 					delay: 0.15,
 				}}
 			>
-				{dockRoutes.map(({ href, label, icon: Icon, isActive }) => {
-					const active = isActive(pathname);
+				{dockRoutes.map(({ href, label, icon: Icon, exact }) => {
+					const active = exact ? pathname === href : pathname.startsWith(href);
 					return (
 						<Link
 							key={href}
