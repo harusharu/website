@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { memo } from "react";
-import { formatShortDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 interface PostCardProps {
 	title: string;
@@ -18,7 +18,7 @@ const PostCard = memo(function PostCard({
 	href,
 	date,
 }: PostCardProps) {
-	const publishedAt = formatShortDate(date);
+	const publishedAt = formatDate(date);
 
 	return (
 		<motion.div whileHover={{ x: 2 }} transition={{ duration: 0.15 }}>
