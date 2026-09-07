@@ -50,15 +50,15 @@ const IntroHero = () => {
 				<motion.div variants={item}>
 					<ImagePreview
 						src={profileAvatarUrl}
-						alt="Profile picture"
-						previewAlt="Profile picture preview"
+						alt="Harshal Sawant — Software Engineer"
+						previewAlt="Harshal Sawant profile picture preview"
 						dialogLabel="Profile picture preview"
 						triggerAriaLabel="Open avatar preview"
 						trigger={
 							<span className="pro-pic-shell relative block size-28 select-none sm:size-32 md:size-36">
 								<Image
 									src={profileAvatarUrl}
-									alt="Profile picture"
+									alt="Harshal Sawant — Software Engineer"
 									className="pro-pic block size-full object-cover"
 									fill
 									priority

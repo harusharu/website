@@ -13,7 +13,7 @@ const ProfileHeader = ({
 	userBio,
 	userImage,
 }: ProfileHeaderProps) => {
-	const imageAlt = "Profile Picture";
+	const imageAlt = "Harshal Sawant — Software Engineer";
 
 	return (
 		<section className="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-center sm:gap-4 sm:text-left">
