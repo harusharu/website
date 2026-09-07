@@ -2,15 +2,6 @@ import type { MetadataRoute } from "next";
 import { projects, siteUrl } from "@/content";
 import { getPosts } from "@/lib/posts";
 
-const parseLastModified = (dateString: string) => {
-	const parsedDate = new Date(dateString);
-	if (Number.isNaN(parsedDate.getTime())) {
-		return new Date();
-	}
-
-	return parsedDate;
-};
-
 const sitemap = (): MetadataRoute.Sitemap => {
 	// lastModified only where a real content date exists — "now" on every build
 	// rewrites all lastmods and teaches Google to ignore the signal.
@@ -47,12 +38,15 @@ const sitemap = (): MetadataRoute.Sitemap => {
 		},
 	];
 
-	const postRoutes: MetadataRoute.Sitemap = getPosts().map((post) => ({
-		url: `${siteUrl}/posts/${post.slug}`,
-		lastModified: parseLastModified(post.date),
-		changeFrequency: "monthly",
-		priority: 0.7,
-	}));
+	const postRoutes: MetadataRoute.Sitemap = getPosts().map((post) => {
+		const parsed = new Date(post.date);
+		return {
+			url: `${siteUrl}/posts/${post.slug}`,
+			lastModified: Number.isNaN(parsed.getTime()) ? new Date() : parsed,
+			changeFrequency: "monthly",
+			priority: 0.7,
+		};
+	});
 
 	const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
 		url: `${siteUrl}/projects/${project.slug}`,
