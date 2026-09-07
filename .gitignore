@@ -22,3 +22,4 @@ test-results/
 .vercel
 .claude/
 .agents/skills/
+.env*
