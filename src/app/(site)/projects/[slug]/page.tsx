@@ -13,8 +13,6 @@ type ProjectPageProps = {
 	}>;
 };
 
-const getSocialImage = (bannerImage: string) => bannerImage || defaultOgImage;
-
 export const generateStaticParams = () => {
 	return projects.map((project) => ({
 		slug: project.slug,
@@ -36,7 +34,7 @@ export const generateMetadata = async ({
 		};
 	}
 
-	const socialImage = getSocialImage(project.bannerImage);
+	const socialImage = project.bannerImage || defaultOgImage;
 
 	return {
 		title: project.title,
@@ -50,22 +48,20 @@ export const generateMetadata = async ({
 			type: "article",
 			url: `/projects/${project.slug}`,
 			authors: [profile.name],
-			images: socialImage
-				? [
-						{
-							url: socialImage,
-							width: 1200,
-							height: 420,
-							alt: `${project.title} banner`,
-						},
-					]
-				: undefined,
+			images: [
+				{
+					url: socialImage,
+					width: 1200,
+					height: 420,
+					alt: `${project.title} banner`,
+				},
+			],
 		},
 		twitter: {
 			card: "summary_large_image",
 			title: project.title,
 			description: project.description,
-			images: socialImage ? [socialImage] : undefined,
+			images: [socialImage],
 			creator: `@${profile.twitterHandle}`,
 		},
 	};
