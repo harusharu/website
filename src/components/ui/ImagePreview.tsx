@@ -17,12 +17,6 @@ interface ImagePreviewProps {
 	previewAlt?: string;
 	dialogLabel?: string;
 	triggerAriaLabel?: string;
-	triggerClassName?: string;
-	width?: number;
-	height?: number;
-	sizes?: string;
-	dialogWidthClassName?: string;
-	imageClassName?: string;
 }
 
 const ImagePreview = ({
@@ -32,12 +26,6 @@ const ImagePreview = ({
 	previewAlt,
 	dialogLabel,
 	triggerAriaLabel = "Open image preview",
-	triggerClassName = "cursor-pointer select-none",
-	width,
-	height,
-	sizes,
-	dialogWidthClassName,
-	imageClassName,
 }: ImagePreviewProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -47,7 +35,7 @@ const ImagePreview = ({
 				variant="unstyled"
 				aria-label={triggerAriaLabel}
 				onClick={() => setIsOpen(true)}
-				className={triggerClassName}
+				className="cursor-pointer select-none"
 			>
 				{trigger}
 			</Button>
@@ -59,11 +47,6 @@ const ImagePreview = ({
 					src={src}
 					alt={previewAlt ?? alt}
 					dialogLabel={dialogLabel}
-					width={width}
-					height={height}
-					sizes={sizes}
-					dialogWidthClassName={dialogWidthClassName}
-					imageClassName={imageClassName}
 				/>
 			)}
 		</>
