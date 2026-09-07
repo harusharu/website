@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProjectListClient from "@/components/sections/projectListClient";
+import ProjectList from "@/components/sections/projectList";
 import BackLink from "@/components/ui/BackLink";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { defaultOgImage, projects } from "@/content";
@@ -33,7 +33,7 @@ const ProjectsPage = () => {
 				<BackLink href="/home" label="Home" />
 			</div>
 
-			<ProjectListClient items={projects} />
+			<ProjectList items={projects} />
 		</section>
 	);
 };
