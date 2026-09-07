@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FiGithub } from "react-icons/fi";
+import BackLink from "@/components/ui/BackLink";
 import ButtonLink from "@/components/ui/ButtonLink";
 import { defaultOgImage, getProjectBySlug, profile, projects } from "@/content";
 
@@ -82,12 +83,10 @@ const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
 		<article className="flex flex-col gap-4">
 			<div className="flex items-center justify-between gap-2">
 				<h1 className="text-2xl font-bold text-(--gb-fg0)">{project.title}</h1>
-				<ButtonLink href="/projects" target="_self" rel="" className="text-sm">
-					Back to Projects
-				</ButtonLink>
+				<BackLink href="/projects" label="All projects" />
 			</div>
 
-			<div className="overflow-hidden rounded-md border border-(--gb-border) bg-(--gb-surface)">
+			<div className="overflow-hidden rounded-xl border border-(--gb-border) bg-(--gb-surface)">
 				<Image
 					src={project.bannerImage}
 					alt={`${project.title} banner`}
@@ -98,7 +97,7 @@ const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
 				/>
 			</div>
 
-			<p className="opacity-80">{project.description}</p>
+			<p className="text-(--gb-fg1)">{project.description}</p>
 
 			<div className="flex flex-wrap gap-2">
 				{project.liveUrl && (
@@ -127,10 +126,17 @@ const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
 			{project.highlights.length > 0 && (
 				<section className="flex flex-col gap-2">
 					<h2 className="text-lg font-semibold text-(--gb-fg0)">Highlights</h2>
-					<ul className="list-disc pl-5">
+					<ul className="flex flex-col gap-1.5 text-(--gb-fg1)">
 						{project.highlights.map((highlight) => (
-							<li key={`${project.slug}-highlight-${highlight}`}>
-								{highlight}
+							<li
+								key={`${project.slug}-highlight-${highlight}`}
+								className="flex gap-2"
+							>
+								<span
+									aria-hidden="true"
+									className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-(--gb-fg2)"
+								/>
+								<span>{highlight}</span>
 							</li>
 						))}
 					</ul>
@@ -143,7 +149,7 @@ const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
 					{project.techStack.map((tech) => (
 						<li
 							key={`${project.slug}-${tech}`}
-							className="list-none rounded-md border border-(--gb-border) px-2 py-0.5 text-sm"
+							className="mono-label list-none rounded-md border border-(--gb-border) px-2 py-1"
 						>
 							{tech}
 						</li>
@@ -155,7 +161,7 @@ const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
 				<section className="flex flex-col gap-2">
 					<h2 className="text-lg font-semibold text-(--gb-fg0)">Preview</h2>
 					<video
-						className="w-full rounded-md border border-(--gb-border)"
+						className="w-full rounded-xl border border-(--gb-border)"
 						loop
 						autoPlay
 						muted

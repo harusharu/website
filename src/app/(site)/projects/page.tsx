@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ProjectListClient from "@/components/sections/projectListClient";
-import ButtonLink from "@/components/ui/ButtonLink";
+import BackLink from "@/components/ui/BackLink";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { defaultOgImage, projects } from "@/content";
 
@@ -30,9 +30,7 @@ const ProjectsPage = () => {
 		<section className="flex flex-col gap-4">
 			<div className="flex items-center justify-between gap-2">
 				<SectionHeading title="Projects" as="h1" />
-				<ButtonLink href="/" target="_self" rel="" className="text-sm">
-					Back Home
-				</ButtonLink>
+				<BackLink href="/home" label="Home" />
 			</div>
 
 			<ProjectListClient items={projects} />

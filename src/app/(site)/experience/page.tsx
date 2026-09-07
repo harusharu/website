@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ExperienceList from "@/components/sections/experienceList";
-import ButtonLink from "@/components/ui/ButtonLink";
+import BackLink from "@/components/ui/BackLink";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { defaultOgImage, experiences } from "@/content";
 
@@ -30,9 +30,7 @@ const ExperiencePage = () => {
 		<section className="flex flex-col gap-4">
 			<div className="flex items-center justify-between gap-2">
 				<SectionHeading title="Experience" as="h1" />
-				<ButtonLink href="/" target="_self" rel="" className="text-sm">
-					Back Home
-				</ButtonLink>
+				<BackLink href="/home" label="Home" />
 			</div>
 
 			<ExperienceList items={experiences} />

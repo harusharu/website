@@ -25,7 +25,9 @@ const Projects = () => {
 		<section id="projects" className="section-fluid flex flex-col gap-3">
 			<SectionHeading title="Projects" />
 			<ProjectList items={projects} limit={visibleCount} />
-			{shouldShowViewAll && <ViewAllLink href="/projects" />}
+			{shouldShowViewAll && (
+				<ViewAllLink href="/projects" label="View all projects" />
+			)}
 		</section>
 	);
 };

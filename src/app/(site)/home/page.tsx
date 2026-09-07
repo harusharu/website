@@ -3,16 +3,16 @@ import About from "@/components/sections/about";
 import Experience from "@/components/sections/experience";
 import Footer from "@/components/sections/footer";
 import GitHubProfileHeader from "@/components/sections/githubProfileHeader";
-import Hire from "@/components/sections/hire";
+import Posts from "@/components/sections/posts";
 import Projects from "@/components/sections/projects";
-import Skills from "@/components/sections/skills";
-import Support from "@/components/sections/support";
-import Writings from "@/components/sections/writings";
 import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
+	title: "Home",
+	description:
+		"Overview of Harshal Sawant's background, experience, projects, and technical writing.",
 	alternates: {
-		canonical: "/",
+		canonical: "/home",
 	},
 };
 export const revalidate = 300;
@@ -28,19 +28,10 @@ const HomePageRoute = () => {
 				<Experience />
 			</Reveal>
 			<Reveal delay={0.1}>
-				<Skills />
-			</Reveal>
-			<Reveal delay={0.1}>
 				<Projects />
 			</Reveal>
 			<Reveal delay={0.1}>
-				<Writings />
-			</Reveal>
-			<Reveal delay={0.1}>
-				<Hire />
-			</Reveal>
-			<Reveal delay={0.1}>
-				<Support />
+				<Posts />
 			</Reveal>
 			<Reveal delay={0.1}>
 				<Footer />
