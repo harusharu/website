@@ -26,7 +26,7 @@ export const formatLongDate = (date: string) =>
 
 // ---------------------------------------------------------------------------
 // Motion presets — kept exclusively for explicit, user-triggered feedback
-// (hover, tap, dropdown/modal open-close). All passive scroll-reveal and
+// (hover, tap, modal open-close). All passive scroll-reveal and
 // mount-time entrance variants have been removed; sections paint instantly.
 // Every animated property here is GPU-friendly (transform / opacity).
 // ---------------------------------------------------------------------------
@@ -44,24 +44,6 @@ export const tapScale = { scale: 0.97 };
 
 /** Subtle scale-up on hover — pair with `whileHover`. */
 export const hoverScale = { scale: 1.03 };
-
-/** Dropdown / popover entrance (use with `AnimatePresence`).
- *  GPU-only: opacity + translateY + scale. */
-export const dropdownVariants: Variants = {
-	hidden: { opacity: 0, y: 6, scale: 0.97 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		scale: 1,
-		transition: { type: "spring", stiffness: 500, damping: 30, mass: 0.6 },
-	},
-	exit: {
-		opacity: 0,
-		y: 4,
-		scale: 0.98,
-		transition: { duration: 0.12, ease: "easeIn" },
-	},
-};
 
 /** Modal backdrop fade (opacity only). */
 export const backdropVariants: Variants = {
