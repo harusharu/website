@@ -4,6 +4,9 @@ import { profile, resumeFilePath, siteUrl } from "@/content";
 export const metadata: Metadata = {
 	title: "Resume",
 	description: `${profile.name} — ${profile.bio}.`,
+	alternates: {
+		canonical: "/resume",
+	},
 	openGraph: {
 		title: `Resume — ${profile.name}`,
 		description: `${profile.name} — ${profile.bio}.`,
