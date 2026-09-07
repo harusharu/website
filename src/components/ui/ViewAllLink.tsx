@@ -10,7 +10,6 @@ interface ViewAllLinkProps {
 	label?: string;
 }
 
-// Reused by home sections to keep CTA behavior and styling consistent.
 const ViewAllLink = ({ href, label = "View all" }: ViewAllLinkProps) => {
 	return (
 		<motion.div

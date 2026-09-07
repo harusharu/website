@@ -32,9 +32,7 @@ const personJsonLd = {
 	],
 };
 
-// ponytail: dev-only Figma capture script is gated at module level so the
-// production HTML never carries a runtime branch. Tree-shaking drops the
-// import + element entirely in the prod build.
+// module-level gate keeps the Figma capture script out of prod HTML entirely.
 const isDev = process.env.NODE_ENV === "development";
 
 export default function RootLayout({
@@ -47,7 +45,6 @@ export default function RootLayout({
 			<head>
 				<script
 					type="application/ld+json"
-					// Schema.org Person data for richer search snippets.
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: Required pattern for JSON-LD schema injection.
 					dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
 				/>

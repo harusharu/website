@@ -40,7 +40,6 @@
 	--shadow-tint: 0 0 0;
 }
 
-/* View Transition Theme Animations */
 ::view-transition-old(root),
 ::view-transition-new(root) {
 	animation: none;
@@ -111,9 +110,6 @@ p {
 	opacity: 0.05;
 }
 
-/* ---------------------------------------------------------------------------
- * Mono / label utilities
- * ------------------------------------------------------------------------ */
 .mono-label {
 	font-family: var(--font-mono);
 	font-size: 0.72rem;
@@ -140,19 +136,14 @@ p {
 	}
 }
 
-/* Profile header — a tight fluid placeholder keeps
-   initial paint fast without snapping when off-screen. */
+/* content-visibility + fixed intrinsic size so there's no snap on scroll-in. */
 .section-stack > .section-profile {
 	content-visibility: auto;
 	contain-intrinsic-size: auto 220px;
 }
 
-/* Static, sub-200px sections — content-visibility intentionally left off
-   to prevent intrinsic-size snapping on tiny modules. No rule needed. */
-
-/* Dynamic lists — kept as a no-op so adjacent sections don't trigger forced
-   layout mid-scroll. Lists are short (2-3 items), the containment tradeoff
-   doesn't pay off here. */
+/* Tiny static sections: content-visibility skipped — intrinsic-size snapping
+   costs more than it saves. Short lists: containment tradeoff doesn't pay off. */
 .section-stack > .section-fluid {
 	display: block;
 }
@@ -161,8 +152,6 @@ p {
 	line-height: 1.72;
 }
 
-/* Simulated squircle — softer than a perfect circle, avoids the generic
-   "every avatar is a circle" pattern. */
 .pro-pic-shell {
 	position: relative;
 	display: block;
@@ -446,8 +435,7 @@ p {
 	flex-shrink: 0;
 }
 
-/* Project preview reveal — GPU-only (clip-path + opacity), no layout
-   reflow. Toggled via [data-open] by the user-driven open/close button. */
+/* GPU-only reveal (clip-path + opacity); toggled via [data-open]. */
 .project-preview-clip {
 	clip-path: inset(0 0 100% 0);
 	opacity: 0;
@@ -462,14 +450,8 @@ p {
 	opacity: 1;
 }
 
-/* ---------------------------------------------------------------------------
- * Floating dock
- *
- * Centering lives on `.dock-wrapper` (plain, un-animated) rather than on
- * the motion-controlled `.dock` element itself — Framer Motion writes its
- * own inline `transform` for the slide-in animation, which would otherwise
- * clobber a CSS `transform: translateX(-50%)` on the same node.
- * ------------------------------------------------------------------------ */
+/* Centering must live on .dock-wrapper: motion writes inline transform on
+   .dock and would clobber a CSS translateX(-50%) on the same node. */
 .dock-wrapper {
 	position: fixed;
 	left: 50%;

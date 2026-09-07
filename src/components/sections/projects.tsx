@@ -5,9 +5,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ViewAllLink from "@/components/ui/ViewAllLink";
 import { projects } from "@/content";
 
-// Code-split the project list (motion + react-icons + video element) out of
-// the initial client bundle. The placeholder keeps the flex column height
-// stable while the dynamic chunk resolves.
+// Split the below-fold list code (motion/icons/video) out of first paint;
+// the placeholder holds layout height until the chunk resolves.
 const ProjectList = dynamic(() => import("@/components/sections/projectList"), {
 	loading: () => (
 		<div

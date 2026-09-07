@@ -6,8 +6,6 @@ import { useState } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { profile } from "@/content";
 
-// Bio runs long; let the reader expand.
-
 const About = () => {
 	const [expanded, setExpanded] = useState(false);
 	const clamped = !expanded;

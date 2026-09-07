@@ -1,11 +1,7 @@
 import localFont from "next/font/local";
 
-// `display: "swap"` keeps text visible during font load (no FOIT).
-// `adjustFontFallback` lets Next.js size-adjust the named fallback to the
-// target font's x-height/cap-height metrics, eliminating the post-swap
-// layout snap that drives Cumulative Layout Shift on slow connections.
-// Explicit `fallback` provides the visible fallback chain before swap.
-
+// display:swap avoids invisible text during load; adjustFontFallback plus an
+// explicit fallback chain prevent the post-swap layout snap (CLS).
 const bodyFont = localFont({
 	src: [
 		{

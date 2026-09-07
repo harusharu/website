@@ -5,10 +5,6 @@ import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 export type IconComponent = ComponentType<{ className?: string }>;
 
-// ---------------------------------------------------------------------------
-// Profile
-// ---------------------------------------------------------------------------
-
 interface Profile {
 	name: string;
 	shortName: string;
@@ -48,16 +44,11 @@ export const profile: Profile = {
 };
 
 /**
- * Tokenless profile picture: GitHub serves the user's avatar directly from
- * `github.com/<username>.png` without authentication, no API call, no quota.
+ * GitHub serves `<username>.png` with no auth, API call, or quota.
  */
 export const profileAvatarUrl = `https://github.com/${profile.githubUsername}.png`;
 
 export const resumeFilePath = "/docs/Harshal_Sawant_Resume.pdf";
-
-// ---------------------------------------------------------------------------
-// SEO / site metadata
-// ---------------------------------------------------------------------------
 
 const normalizeSiteUrl = (url: string) => url.replace(/\/$/, "");
 
@@ -135,20 +126,12 @@ export const seoMetadata: Metadata = {
 	},
 };
 
-// ---------------------------------------------------------------------------
-// Post metadata shape
-// ---------------------------------------------------------------------------
-
 export interface PostMeta {
 	slug: string;
 	title: string;
 	description: string;
 	date: string;
 }
-
-// ---------------------------------------------------------------------------
-// Projects
-// ---------------------------------------------------------------------------
 
 export type ProjectStatus = "active" | "building" | "archived";
 
@@ -260,17 +243,11 @@ export const projects: Project[] = [
 		bannerImage: "/images/banners/projects.gif",
 		previewVideo: "",
 	},
-	// ponytail: 8 additional planned projects were commented out below. Re-enable
-	// by uncommenting the desired block when the project ships; git history has
-	// the original content if anything older is needed.
+	// ponytail: dead project drafts were pruned; revive from git history when one ships.
 ];
 
 export const getProjectBySlug = (slug: string) =>
 	projects.find((project) => project.slug === slug);
-
-// ---------------------------------------------------------------------------
-// Experience
-// ---------------------------------------------------------------------------
 
 export interface Experience {
 	role: string;
@@ -295,10 +272,6 @@ export const experiences: Experience[] = [
 		],
 	},
 ];
-
-// ---------------------------------------------------------------------------
-// Social
-// ---------------------------------------------------------------------------
 
 interface SocialLink {
 	name: string;

@@ -9,7 +9,6 @@ import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import type { PostMeta } from "@/content";
 
-// Markdown source files for post content.
 const postsDirectory = path.join(process.cwd(), "src/content/posts");
 const markdownProcessor = remark().use(remarkGfm).use(remarkHtml, {
 	sanitize: false,
