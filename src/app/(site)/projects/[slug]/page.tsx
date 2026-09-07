@@ -1,3 +1,4 @@
+// biome-ignore-all lint/security/noDangerouslySetInnerHtml: JSON-LD schema injection is a required pattern.
 import { Link as LinkIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -5,7 +6,13 @@ import { notFound } from "next/navigation";
 import { FiGithub } from "react-icons/fi";
 import BackLink from "@/components/ui/BackLink";
 import ButtonLink from "@/components/ui/ButtonLink";
-import { defaultOgImage, getProjectBySlug, profile, projects } from "@/content";
+import {
+	defaultOgImage,
+	getProjectBySlug,
+	profile,
+	projects,
+	siteUrl,
+} from "@/content";
 
 type ProjectPageProps = {
 	params: Promise<{
@@ -75,8 +82,39 @@ const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
 		notFound();
 	}
 
+	const projectUrl = `${siteUrl}/projects/${project.slug}`;
+
+	const breadcrumbJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: `${siteUrl}/home`,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Projects",
+				item: `${siteUrl}/projects`,
+			},
+			{
+				"@type": "ListItem",
+				position: 3,
+				name: project.title,
+				item: projectUrl,
+			},
+		],
+	};
+
 	return (
 		<article className="flex flex-col gap-4">
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+			/>
 			<div className="flex items-center justify-between gap-2">
 				<h1 className="text-2xl font-bold text-(--gb-fg0)">{project.title}</h1>
 				<BackLink href="/projects" label="All projects" />

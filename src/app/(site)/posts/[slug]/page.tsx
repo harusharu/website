@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BackLink from "@/components/ui/BackLink";
-import { defaultOgImage, profile } from "@/content";
+import { defaultOgImage, profile, siteUrl } from "@/content";
 import { getPostBySlug, getPosts, renderMarkdown } from "@/lib/posts";
 import { formatLongDate } from "@/lib/utils";
 
@@ -73,13 +73,63 @@ const PostPage = async ({ params }: PostPageProps) => {
 	}
 
 	const htmlContent = await renderMarkdown(post.content);
+	const postUrl = `${siteUrl}/posts/${post.slug}`;
+
+	const blogPostingJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		headline: post.title,
+		description: post.description,
+		datePublished: post.date,
+		url: postUrl,
+		mainEntityOfPage: postUrl,
+		author: {
+			"@type": "Person",
+			name: profile.name,
+			url: siteUrl,
+		},
+	};
+
+	const breadcrumbJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: `${siteUrl}/home`,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Posts",
+				item: `${siteUrl}/posts`,
+			},
+			{
+				"@type": "ListItem",
+				position: 3,
+				name: post.title,
+				item: postUrl,
+			},
+		],
+	};
 
 	return (
 		<article className="content-rail flex flex-col gap-4">
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+			/>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+			/>
 			<div className="flex flex-wrap items-center justify-between gap-2">
-				<time dateTime={post.date} className="mono-label tnum">
-					{formatLongDate(post.date)}
-				</time>
+				<p className="mono-label tnum">
+					By {profile.name} ·{" "}
+					<time dateTime={post.date}>{formatLongDate(post.date)}</time>
+				</p>
 				<BackLink href="/posts" label="All posts" />
 			</div>
 
