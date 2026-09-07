@@ -12,43 +12,38 @@ const parseLastModified = (dateString: string) => {
 };
 
 const sitemap = (): MetadataRoute.Sitemap => {
-	const now = new Date();
+	// lastModified only where a real content date exists — "now" on every build
+	// rewrites all lastmods and teaches Google to ignore the signal.
 	const staticRoutes: MetadataRoute.Sitemap = [
 		{
 			url: `${siteUrl}/`,
-			lastModified: now,
-			changeFrequency: "monthly",
-			priority: 1,
+			changeFrequency: "yearly",
+			priority: 0.5,
 		},
 		{
 			url: `${siteUrl}/home`,
-			lastModified: now,
 			changeFrequency: "weekly",
-			priority: 0.95,
+			priority: 1,
 		},
 		{
 			url: `${siteUrl}/posts`,
-			lastModified: now,
 			changeFrequency: "weekly",
 			priority: 0.9,
 		},
 		{
 			url: `${siteUrl}/projects`,
-			lastModified: now,
 			changeFrequency: "monthly",
 			priority: 0.8,
 		},
 		{
 			url: `${siteUrl}/experience`,
-			lastModified: now,
 			changeFrequency: "monthly",
 			priority: 0.8,
 		},
 		{
-			url: `${siteUrl}/llms.txt`,
-			lastModified: now,
+			url: `${siteUrl}/resume`,
 			changeFrequency: "monthly",
-			priority: 0.4,
+			priority: 0.3,
 		},
 	];
 
@@ -61,7 +56,6 @@ const sitemap = (): MetadataRoute.Sitemap => {
 
 	const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
 		url: `${siteUrl}/projects/${project.slug}`,
-		lastModified: now,
 		changeFrequency: "monthly",
 		priority: 0.7,
 	}));

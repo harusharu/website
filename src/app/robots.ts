@@ -11,7 +11,6 @@ const robots = (): MetadataRoute.Robots => {
 			},
 		],
 		sitemap: `${siteUrl}/sitemap.xml`,
-		host: siteUrl,
 	};
 };
 
