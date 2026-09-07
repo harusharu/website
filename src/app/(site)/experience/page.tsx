@@ -5,21 +5,24 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { defaultOgImage, experiences } from "@/content";
 
 export const metadata: Metadata = {
-	title: "Experience",
-	description: "Professional and freelance experience",
+	title: "Experience — Software Engineer",
+	description:
+		"Professional experience of Harshal Sawant — backend services in Rust, REST APIs, PostgreSQL, Redis, Docker, and CI/CD for reliable production systems.",
 	alternates: {
 		canonical: "/experience",
 	},
 	openGraph: {
-		title: "Experience",
-		description: "Professional and freelance experience",
+		title: "Experience — Software Engineer | Harshal Sawant",
+		description:
+			"Professional experience of Harshal Sawant — backend services in Rust, REST APIs, PostgreSQL, Redis, Docker, and CI/CD for reliable production systems.",
 		url: "/experience",
 		images: [defaultOgImage],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Experience",
-		description: "Professional and freelance experience",
+		title: "Experience — Software Engineer | Harshal Sawant",
+		description:
+			"Professional experience of Harshal Sawant — backend services in Rust, REST APIs, PostgreSQL, Redis, Docker, and CI/CD for reliable production systems.",
 		images: [defaultOgImage],
 	},
 };

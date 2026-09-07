@@ -6,24 +6,24 @@ import { defaultOgImage } from "@/content";
 import { getPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
-	title: "Posts",
+	title: "Posts — Systems, Backend & Linux",
 	description:
-		"Technical writing on systems, backend engineering, and Linux internals",
+		"Technical writing on distributed systems, backend engineering, and Linux internals — tracing, webhooks, rate limiting, migrations, and recovery guides.",
 	alternates: {
 		canonical: "/posts",
 	},
 	openGraph: {
-		title: "Posts",
+		title: "Posts — Systems, Backend & Linux | Harshal Sawant",
 		description:
-			"Technical writing on systems, backend engineering, and Linux internals",
+			"Technical writing on distributed systems, backend engineering, and Linux internals — tracing, webhooks, rate limiting, migrations, and recovery guides.",
 		url: "/posts",
 		images: [defaultOgImage],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Posts",
+		title: "Posts — Systems, Backend & Linux | Harshal Sawant",
 		description:
-			"Technical writing on systems, backend engineering, and Linux internals",
+			"Technical writing on distributed systems, backend engineering, and Linux internals — tracing, webhooks, rate limiting, migrations, and recovery guides.",
 		images: [defaultOgImage],
 	},
 };

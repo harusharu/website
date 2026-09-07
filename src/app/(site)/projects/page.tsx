@@ -5,21 +5,24 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { defaultOgImage, projects } from "@/content";
 
 export const metadata: Metadata = {
-	title: "Projects",
-	description: "Showcase of software projects",
+	title: "Projects — Systems & Backend Builds",
+	description:
+		"Systems and backend projects by Harshal Sawant — Android internals, CPU scheduling, URL shortening, and API rate limiting in Go, C++, Shell, and Rust.",
 	alternates: {
 		canonical: "/projects",
 	},
 	openGraph: {
-		title: "Projects",
-		description: "Showcase of software projects",
+		title: "Projects — Systems & Backend Builds | Harshal Sawant",
+		description:
+			"Systems and backend projects by Harshal Sawant — Android internals, CPU scheduling, URL shortening, and API rate limiting in Go, C++, Shell, and Rust.",
 		url: "/projects",
 		images: [defaultOgImage],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Projects",
-		description: "Showcase of software projects",
+		title: "Projects — Systems & Backend Builds | Harshal Sawant",
+		description:
+			"Systems and backend projects by Harshal Sawant — Android internals, CPU scheduling, URL shortening, and API rate limiting in Go, C++, Shell, and Rust.",
 		images: [defaultOgImage],
 	},
 };

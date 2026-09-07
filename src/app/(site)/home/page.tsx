@@ -6,14 +6,28 @@ import Posts from "@/components/sections/posts";
 import ProfileHeader from "@/components/sections/profileHeader";
 import Projects from "@/components/sections/projects";
 import Reveal from "@/components/ui/Reveal";
-import { profile, profileAvatarUrl } from "@/content";
+import { defaultOgImage, profile, profileAvatarUrl } from "@/content";
 
 export const metadata: Metadata = {
-	title: "Home",
+	title: "Systems & Backend Engineer",
 	description:
-		"Overview of Harshal Sawant's background, experience, projects, and technical writing.",
+		"Harshal Sawant is a Software Engineer in Mumbai building low-latency backends and distributed systems in Rust and Go — explore experience, projects, and technical writing.",
 	alternates: {
 		canonical: "/home",
+	},
+	openGraph: {
+		title: "Harshal Sawant — Systems & Backend Engineer",
+		description:
+			"Harshal Sawant is a Software Engineer in Mumbai building low-latency backends and distributed systems in Rust and Go — explore experience, projects, and technical writing.",
+		url: "/home",
+		images: [defaultOgImage],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Harshal Sawant — Systems & Backend Engineer",
+		description:
+			"Harshal Sawant is a Software Engineer in Mumbai building low-latency backends and distributed systems in Rust and Go.",
+		images: [defaultOgImage],
 	},
 };
 export const revalidate = 300;
