@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { siteFontVariables } from "@/app/fonts";
 import FloatingDock from "@/components/navigation/FloatingDock";
-import { ThemeProvider } from "@/components/theme-provider";
 import { profile, profileAvatarUrl, seoMetadata, siteUrl } from "@/content";
 import "./globals.css";
 
@@ -59,7 +59,7 @@ export default function RootLayout({
 				)}
 			</head>
 			<body className="antialiased">
-				<ThemeProvider
+				<NextThemesProvider
 					attribute="class"
 					defaultTheme="system"
 					enableSystem
@@ -68,7 +68,7 @@ export default function RootLayout({
 					<div aria-hidden="true" className="grain-overlay" />
 					<FloatingDock />
 					{children}
-				</ThemeProvider>
+				</NextThemesProvider>
 			</body>
 		</html>
 	);
