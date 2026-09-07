@@ -1,16 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import PostCard from "@/components/sections/postCard";
 import type { PostMeta } from "@/content";
-
-const PostCard = dynamic(() => import("@/components/sections/postCard"), {
-	loading: () => (
-		<div
-			className="flex min-h-72 flex-col gap-2.5 md:gap-3.5 md:min-h-56"
-			aria-hidden="true"
-		/>
-	),
-});
 
 interface PostListProps {
 	posts: PostMeta[];
