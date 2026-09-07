@@ -6,13 +6,7 @@ import { notFound } from "next/navigation";
 import { FiGithub } from "react-icons/fi";
 import BackLink from "@/components/ui/BackLink";
 import ButtonLink from "@/components/ui/ButtonLink";
-import {
-	defaultOgImage,
-	getProjectBySlug,
-	profile,
-	projects,
-	siteUrl,
-} from "@/content";
+import { defaultOgImage, profile, projects, siteUrl } from "@/content";
 
 type ProjectPageProps = {
 	params: Promise<{
@@ -33,7 +27,7 @@ export const generateMetadata = async ({
 	params,
 }: ProjectPageProps): Promise<Metadata> => {
 	const { slug } = await params;
-	const project = getProjectBySlug(slug);
+	const project = projects.find((entry) => entry.slug === slug);
 
 	if (!project) {
 		return {
@@ -76,7 +70,7 @@ export const generateMetadata = async ({
 
 const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
 	const { slug } = await params;
-	const project = getProjectBySlug(slug);
+	const project = projects.find((entry) => entry.slug === slug);
 
 	if (!project) {
 		notFound();
