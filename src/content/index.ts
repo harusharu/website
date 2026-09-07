@@ -81,7 +81,7 @@ const siteTitle = profile.name;
 const siteDescription =
 	"Portfolio of Harshal Sawant - Software Engineer focused on distributed systems, developer tooling, and high-performance software.";
 
-export const defaultOgImage = "/favicon.ico";
+export const defaultOgImage = "/opengraph-image";
 
 export const seoMetadata: Metadata = {
 	title: {
@@ -89,15 +89,6 @@ export const seoMetadata: Metadata = {
 		template: `%s | ${profile.name}`,
 	},
 	description: siteDescription,
-	keywords: [
-		"Harshal Sawant",
-		"Portfolio",
-		"Software Engineer",
-		"Distributed Systems",
-		"TypeScript",
-		"Node.js",
-		"High Performance Systems",
-	],
 	authors: [{ name: profile.name }],
 	creator: profile.name,
 	alternates: {
