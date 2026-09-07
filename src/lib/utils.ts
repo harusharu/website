@@ -1,24 +1,12 @@
 import type { Transition, Variants } from "motion/react";
 
-const shortDateFormatter = new Intl.DateTimeFormat("en-US", {
-	year: "numeric",
-	month: "short",
-	day: "numeric",
-	timeZone: "UTC",
-});
-
-const longDateFormatter = new Intl.DateTimeFormat("en-US", {
-	year: "numeric",
-	month: "long",
-	day: "numeric",
-	timeZone: "UTC",
-});
-
-export const formatShortDate = (date: string) =>
-	shortDateFormatter.format(new Date(date));
-
-export const formatLongDate = (date: string) =>
-	longDateFormatter.format(new Date(date));
+export const formatDate = (date: string, month: "short" | "long" = "short") =>
+	new Intl.DateTimeFormat("en-US", {
+		year: "numeric",
+		month,
+		day: "numeric",
+		timeZone: "UTC",
+	}).format(new Date(date));
 
 // Motion rule: user-triggered feedback only (hover/tap/modal). No scroll
 // reveals or mount entrances — sections must paint instantly. GPU props only.
